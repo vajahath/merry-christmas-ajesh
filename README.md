@@ -1,4 +1,4 @@
-# 🎄 Merry Christmas, Ajesh!
+# 🎄 Merry Christmas, Ajesh! [![Deploy to GitHub Pages](https://github.com/vajahath/merry-christmas-ajesh/actions/workflows/deploy.yml/badge.svg)](https://github.com/vajahath/merry-christmas-ajesh/actions/workflows/deploy.yml)
 
 A visually stunning, mobile-friendly Christmas greeting web application built with a modern parallax scrolling feel and festive animations.
 
