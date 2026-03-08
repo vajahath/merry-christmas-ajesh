@@ -1,7 +1,7 @@
-import $ from 'https://cdn.jsdelivr.net/npm/jquery@4.0/+esm';
+import $ from 'jquery';
 
-$(function() {
-  $(window).on('scroll', function() {
+$(function () {
+  $(window).on('scroll', function () {
     parallaxScroll();
   });
 
