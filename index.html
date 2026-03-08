@@ -277,6 +277,68 @@
       text-transform: uppercase;
       margin-bottom: 1rem;
     }
+
+    /* Like Button Styles */
+    .like-section {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: white;
+      position: relative;
+    }
+
+    .like-button {
+      background: white;
+      border: 2px solid var(--red);
+      color: var(--red);
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 15px rgba(196, 30, 58, 0.1);
+      position: relative;
+    }
+
+    .like-button:hover {
+      transform: scale(1.05) translateY(-3px);
+      background: var(--red);
+      color: white;
+      box-shadow: 0 8px 25px rgba(196, 30, 58, 0.3);
+    }
+
+    .like-button:active {
+      transform: scale(0.95);
+    }
+
+    .like-button .heart {
+      transition: transform 0.3s ease;
+    }
+
+    .like-button:hover .heart {
+      transform: scale(1.2);
+    }
+
+    .like-count {
+      font-variant-numeric: tabular-nums;
+      min-width: 20px;
+    }
+
+    .sync-status {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-top: 10px;
+      height: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .sync-status.active {
+      opacity: 1;
+    }
   </style>
 </head>
 
@@ -344,6 +406,18 @@
         <h2 class="accent-font" style="color: var(--green); font-size: 2.5rem; margin-bottom: 1rem;">Happy Holidays</h2>
         <p>Wishing you the most magical Christmas yet. Let's make the coming year even more epic than the last!</p>
       </div>
+    </div>
+  </section>
+
+  <section class="like-section">
+    <div class="reveal">
+      <h2 class="accent-font" style="color: var(--text-dark); font-size: 2.5rem; margin-bottom: 1.5rem;">Spread the Love
+      </h2>
+      <button id="like-btn" class="like-button">
+        <span class="heart">❤️</span>
+        <span class="like-count" id="like-count">0</span>
+      </button>
+      <div id="sync-status" class="sync-status">Saving...</div>
     </div>
   </section>
 

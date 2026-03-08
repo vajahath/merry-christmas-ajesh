@@ -1,9 +1,45 @@
+import { LikeCounter } from "@vaju/personal-like-counter";
+
 // Modern Christmas Greeting Logic
 document.addEventListener('DOMContentLoaded', () => {
   // Dynamic Year - Previous Year Logic
   const yearElement = document.getElementById('dynamic-year');
   if (yearElement) {
     yearElement.textContent = (new Date().getFullYear() - 1).toString();
+  }
+
+  // Persisent Like Counter Logic
+  const counter = new LikeCounter({
+    doc: "merry-christmas-ajesh",
+  });
+
+  const likeBtn = document.getElementById('like-btn');
+  const likeCountLabel = document.getElementById('like-count');
+  const syncLabel = document.getElementById('sync-status');
+
+  if (likeBtn && likeCountLabel && syncLabel) {
+    // Subscribe to counts
+    counter.likes$.subscribe(count => {
+      likeCountLabel.textContent = count.toString();
+    });
+
+    // Subscribe to sync status
+    counter.syncing$.subscribe(isSyncing => {
+      if (isSyncing) {
+        syncLabel.classList.add('active');
+        syncLabel.textContent = 'Saving...';
+      } else {
+        syncLabel.classList.remove('active');
+      }
+    });
+
+    // Handle Click
+    likeBtn.addEventListener('click', () => {
+      counter.incrementLike();
+      // Add a little pop effect to the button manually on click if needed
+      likeBtn.classList.add('active');
+      setTimeout(() => likeBtn.classList.remove('active'), 200);
+    });
   }
 
   // Reveal Observer for scroll animations
