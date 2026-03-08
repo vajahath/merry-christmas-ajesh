@@ -1,5 +1,11 @@
 // Modern Christmas Greeting Logic
 document.addEventListener('DOMContentLoaded', () => {
+  // Dynamic Year - Previous Year Logic
+  const yearElement = document.getElementById('dynamic-year');
+  if (yearElement) {
+    yearElement.textContent = (new Date().getFullYear() - 1).toString();
+  }
+
   // Reveal Observer for scroll animations
   const revealCallback = (entries: IntersectionObserverEntry[]) => {
     entries.forEach(entry => {
