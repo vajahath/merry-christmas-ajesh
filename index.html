@@ -1,221 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="icon" type="image/png" href="./favicon.png">
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <title>Merry Christmas, Ajesh!</title>
-    <style>
-      html,
-      body {
-        width: 100%;
-        font-family: "Playfair Display", serif;
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="icon" type="image/png" href="./favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Outfit:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <title>Merry Christmas, Ajesh!</title>
+  <style>
+    :root {
+      --red: #c41e3a;
+      --green: #1a472a;
+      --gold: #d4af37;
+      --white: #f8f9fa;
+      --text-dark: #2c3e50;
+      --glass: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: linear-gradient(135deg, #e3e8f0 0%, #cbd5e1 100%);
+      color: var(--text-dark);
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .accent-font {
+      font-family: 'Mountains of Christmas', cursive;
+      font-weight: 700;
+    }
+
+    /* Snow Effect */
+    .snow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      /* Deeper Festive Gradient for contrast with white snow */
+      background: linear-gradient(180deg, var(--green) 0%, #0d2616 100%);
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.5rem, 12vw, 7rem);
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      animation: fadeInDown 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .hero p {
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      max-width: 600px;
+      color: rgba(255, 255, 255, 0.9);
+      animation: fadeInUp 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s both;
+    }
+
+    .hero p span {
+      color: var(--gold) !important;
+    }
+
+    /* Gallery Sections */
+    .content-section {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 6rem 1.5rem;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        flex-direction: row;
+        align-items: center;
+        gap: 4rem;
       }
-      body {
-        background: rgba(230, 231, 232, 1);
-        height: 4900px;
+
+      .reverse {
+        flex-direction: row-reverse;
       }
-      div.parallax-bg {
-        width: 100%;
-        position: fixed;
+    }
+
+    .image-card {
+      flex: 1;
+      position: relative;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: white;
+      padding: 12px;
+    }
+
+    .image-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px;
+    }
+
+    .image-card:hover {
+      transform: scale(1.05) translateY(-10px) rotate(1deg);
+    }
+
+    .text-card {
+      flex: 1;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      padding: 3rem;
+      border-radius: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .text-card::before {
+      content: '🎄';
+      position: absolute;
+      top: -20px;
+      right: 20px;
+      font-size: 2rem;
+    }
+
+    .text-card p {
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px) scale(0.95);
+      transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-60px);
       }
-      div#parallax-bg-1 {
-        z-index: 1;
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
-      div#parallax-bg-2 {
-        z-index: 2;
-      } /* background layer */
-      div#parallax-bg-3 {
-        z-index: 3;
-      } /* foreground */
-      div#parallax-bg-3 div {
-        background-repeat: no-repeat;
-        position: absolute;
-        display: block;
-        overflow: hidden;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(60px);
       }
-      div#bg-3-1 {
-        background: url("media/1.webp");
-        width: 83.8vw;
-        height: 42vw;
-        top: 41px;
-        left: 20px;
-        background-size: contain;
-        border: thick solid black;
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
-      div#bg-3-2 {
-        background: url("media/3.webp");
-        width: 80vw;
-        height: 67.8vw;
-        top: 1050px;
-        right: 70px;
-        background-size: contain;
-        border: thick solid black;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      animation: bounce 2s infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    @keyframes bounce {
+
+      0%,
+      20%,
+      50%,
+      80%,
+      100% {
+        transform: translateY(0);
       }
-      div#bg-3-3 {
-        background: url("media/4.webp");
-        width: 59vw;
-        height: 60.7vw;
-        top: 1800px;
-        right: 140px;
-        background-size: contain;
-        border: thick solid black;
+
+      40% {
+        transform: translateY(-15px);
       }
-      div#bg-3-4 {
-        background: url(media/2.webp);
-        width: 66vw;
-        height: 66vw;
-        top: 2800px;
-        right: 34px;
-        background-size: contain;
-        border: thick solid black;
-      } /* middle layer clouds */
-      div#parallax-bg-2 div {
-        background: url("http://schulzmarcel.de/x/drafts/parallax/img/cloud-lg1.png");
-        background-repeat: no-repeat;
-        position: absolute;
-        display: block;
-        width: 488px;
-        height: 138px;
-        overflow: hidden;
+
+      60% {
+        transform: translateY(-7px);
       }
-      div#bg-2-1 {
-        top: 120px;
-        left: 220px;
-      }
-      div#bg-2-2 {
-        top: 270px;
-        right: 141px;
-      }
-      div#bg-2-3 {
-        top: 870px;
-        left: 25px;
-      }
-      div#bg-2-3-text {
-        top: 900px;
-        left: 25px;
-      }
-      div#bg-2-4 {
-        top: 1120px;
-        right: 83px;
-      }
-      div#bg-2-5 {
-        top: 1620px;
-        left: 140px;
-      }
-      div#bg-2-6 {
-        top: 720px;
-        left: 240px;
-      } /*background layer clouds */
-      div#parallax-bg-1 div {
-        background-repeat: no-repeat;
-        position: absolute;
-        display: block;
-        width: 488px;
-        height: 138px;
-        overflow: hidden;
-      }
-      div#bg-1-1 {
-        background: url("http://schulzmarcel.de/x/drafts/parallax/img/cloud-sm1.png");
-        top: 200px;
-        left: -115px;
-      }
-      div#bg-1-1-text {
-        top: 210px;
-        left: -125px;
-      }
-      div#bg-1-2 {
-        background: url("http://schulzmarcel.de/x/drafts/parallax/img/cloud-lg2.png");
-        top: 420px;
-        left: 0px;
-      }
-      div#bg-1-2-text {
-        top: 470px;
-        left: 0px;
-      }
-      div#bg-1-3 {
-        background: url("http://schulzmarcel.de/x/drafts/parallax/img/cloud-sm1.png");
-        top: 850px;
-        right: -260px;
-      }
-      div#bg-1-3-text {
-        top: 990px;
-        right: 60px;
-      }
-      div#bg-1-4 {
-        background: url("http://schulzmarcel.de/x/drafts/parallax/img/cloud-sm1.png");
-        top: 1350px;
-        left: 200px;
-      }
-      div#bg-1-4-text {
-        top: 1550px;
-        right: 70px;
-      }
-      div#bg-1-5 {
-        background: url("http://schulzmarcel.de/x/drafts/parallax/img/cloud-lg2.png");
-        top: 1200px;
-        left: -118px;
-      }
-      .fly-text {
-      }
-    </style>
-  </head>
-  <body>
-    <div id="parallax-bg-3" class="parallax-bg">
-      <div id="bg-3-1"></div>
-      <div id="bg-3-2"></div>
-      <div id="bg-3-3"></div>
-      <div id="bg-3-4"></div>
+    }
+
+    footer {
+      padding: 6rem 2rem;
+      text-align: center;
+      background: var(--green);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer p {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s;
+    }
+
+    footer a:hover {
+      border-color: var(--gold);
+    }
+
+    /* Holiday Touches */
+    .holiday-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="snow-container" id="snow-container"></div>
+
+  <section class="hero">
+    <div class="holiday-badge">Holiday Season 2025</div>
+    <h1 class="accent-font">Merry Christmas</h1>
+    <p>A special greeting for my awesome friend, <span style="font-weight: 600; color: var(--red);">Ajesh!</span></p>
+    <div class="scroll-indicator">
+      <span>Scroll to explore</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+      </svg>
     </div>
-    <div id="parallax-bg-2" class="parallax-bg">
-      <div id="bg-2-1"></div>
-      <div id="bg-2-2"></div>
-      <div id="bg-2-3"></div>
-      <div id="bg-2-3-text">
-        <p class="fly-text" style="text-align: left;">😎🤦‍♀️🙊🐈</p>
+  </section>
+
+  <section class="content-section">
+    <div class="container reveal">
+      <div class="image-card">
+        <img src="media/1.webp" alt="A special memory with Ajesh">
       </div>
-      <div id="bg-2-4"></div>
-      <div id="bg-2-5"></div>
-      <div id="bg-2-6"></div>
+      <div class="text-card">
+        <h2 class="accent-font" style="color: var(--red); font-size: 2.5rem; margin-bottom: 1rem;">Unspoken Bond</h2>
+        <p>Chocolate🍫 doesn’t ask silly questions... <br><strong>chocolate understands</strong> – just like your best
+          friends do!</p>
+      </div>
     </div>
-    <div id="parallax-bg-1" class="parallax-bg">
-      <div id="bg-1-1"></div>
-      <div id="bg-1-1-text">
-        <p class="fly-text" style="text-align: right;">
-          Chocolate🍫 doesn’t ask silly questions, <br />
-          chocolate understands – just like your friends!
-        </p>
+  </section>
+
+  <section class="content-section">
+    <div class="container reverse reveal">
+      <div class="image-card">
+        <img src="media/3.webp" alt="Celebrating together">
       </div>
-      <div id="bg-1-2"></div>
-      <div id="bg-1-2-text">
-        <p class="fly-text" style="font-weight: 800; font-size: 1.7em;">
-          &nbsp;🎈 Merry Christmas, Ajesh!
-        </p>
+      <div class="text-card">
+        <h2 class="accent-font" style="color: var(--green); font-size: 2.5rem; margin-bottom: 1rem;">Endless Fun</h2>
+        <p>From the laughs to the crazy moments, life's better with friends like you. <br><br>Keep being amazing!
+          😎🤦‍♀️🙊🐈</p>
       </div>
-      <div id="bg-1-3"></div>
-      <div id="bg-1-3-text">
-        <p class="fly-text" style="text-align: right;">
-          May God shower upon you and your family <br />abundance of health,
-          wealth <br />and happiness 🙌
-        </p>
-      </div>
-      <div id="bg-1-4"></div>
-      <div id="bg-1-4-text">
-        <p class="fly-text" style="text-align: right;">
-          with 💪, your friend, <a href="http://twitter.com/vajahath7"
-            >Vajahath</a
-          >
-        </p>
-      </div>
-      <div id="bg-1-5"></div>
     </div>
-    <script type="module" src="./index.ts"></script>
-  </body>
+  </section>
+
+  <section class="content-section">
+    <div class="container reveal">
+      <div class="image-card">
+        <img src="media/4.webp" alt="Warmest wishes">
+      </div>
+      <div class="text-card">
+        <h2 class="accent-font" style="color: var(--red); font-size: 2.5rem; margin-bottom: 1rem;">Heartfelt Wishes</h2>
+        <p>May God shower upon you and your family an abundance of health, wealth, and pure happiness this season. 🙌
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container reverse reveal">
+      <div class="image-card">
+        <img src="media/2.webp" alt="Cheers to the future">
+      </div>
+      <div class="text-card">
+        <h2 class="accent-font" style="color: var(--green); font-size: 2.5rem; margin-bottom: 1rem;">Happy Holidays</h2>
+        <p>Wishing you the most magical Christmas yet. Let's make the coming year even more epic than the last!</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Created with 🎄 and 💪</p>
+    <p>Your friend, <a href="https://twitter.com/vajahath7" target="_blank">Vajahath</a></p>
+  </footer>
+
+  <script type="module" src="./index.ts"></script>
+</body>
+
 </html>
